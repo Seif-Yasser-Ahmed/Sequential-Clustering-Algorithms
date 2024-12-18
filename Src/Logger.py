@@ -12,7 +12,7 @@ class Logger:
         with open(file_name, 'w') as file:
             json.dump(data, file, cls=NumpyEncoder)
 
-    def PlotClusters(data, clusters, method):
+    def PlotClusters(data, clusters, method, algo='BSAS'):
         plt.figure(figsize=(10, 6))
         means = []
         for cluster in clusters:
@@ -34,9 +34,10 @@ class Logger:
             plt.scatter([], [], marker='x', color='red', label=f'Mean {
                         i+1}: ({mean[0]:.2f}, {mean[1]:.2f})')
         plt.legend()
-        plt.savefig(f'Output/clusters_{method}.png')
+        plt.savefig(f'Output/clusters_{algo}_{method}.png')
 
     @staticmethod
-    def log_clusters(data, clusters, distance_method='euclidean'):
-        Logger.save_json(clusters, f'Output/clusters_{distance_method}.json')
-        Logger.PlotClusters(data, clusters, distance_method)
+    def log_clusters(data, clusters, distance_method='euclidean', algo='BSAS'):
+        Logger.save_json(
+            clusters, f'Output/clusters_{algo}_{distance_method}.json')
+        Logger.PlotClusters(data, clusters, distance_method, algo=algo)
