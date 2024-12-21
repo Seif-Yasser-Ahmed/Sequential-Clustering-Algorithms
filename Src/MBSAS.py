@@ -32,11 +32,6 @@ class MBSAS:
                 no_of_clusters += 1
                 clusters.append({'Cluster': no_of_clusters,
                                 'Members': [data[i]], 'Mean': data[i]})
-            # else:
-            #     min_cluster['Members'].append(data[i])
-            #     min_cluster['Mean'] = np.mean(min_cluster['Members'], axis=0)
-            # print("Clusters Now", clusters)
-            # print("="*50)
         for i in range(len(data)):
             if not any(np.array_equal(data[i], member) for cluster in clusters for member in cluster['Members']):
                 min_distance = float('inf')
